@@ -11,8 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
-    Util util = new Util();
-
+    private final Connection connection = Util.getConnection();
+    
+    public UserDaoJDBCImpl() {
+        
+    }
+    
     public void createUsersTable() {
         String craft = "CREATE TABLE IF NOT EXISTS USERS" +
                 "  id       BIGINT       PRIMARY KEY AUTOINCREMENT NOT NULL," +
