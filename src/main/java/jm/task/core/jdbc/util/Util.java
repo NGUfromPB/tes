@@ -11,9 +11,9 @@ public class Util {
     private static final String U = "root";
     private static final String P = "1234";
 
-    private Connection connection;
+    private static Connection connection;
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         connection = null;
         try {
             Class.forName(driver);
