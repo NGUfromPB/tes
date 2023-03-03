@@ -1,8 +1,6 @@
 package jm.task.core.jdbc.util;
 import org.hibernate.SessionFactory;
 
-import javax.security.auth.login.Configuration;
-import java.net.URL;
 import java.sql.*;
 
 public class Util {
