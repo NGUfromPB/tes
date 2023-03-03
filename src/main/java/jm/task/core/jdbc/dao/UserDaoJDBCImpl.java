@@ -88,3 +88,4 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 }
+// логика транзакций по типу возврашение к коммиту? я совсем не понимаю как это можно сделать
