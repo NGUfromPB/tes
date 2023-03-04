@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
-    private final Connection connection = Util.getConnection();
+    private static final Connection connection = Util.getConnection();
 
     public UserDaoJDBCImpl() {
 
@@ -25,6 +25,11 @@ public class UserDaoJDBCImpl implements UserDao {
             System.out.println("Успешно: создание таблицы");
         } catch (SQLException e) {
             System.out.println("SQLEx " + e);
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 
@@ -34,6 +39,11 @@ public class UserDaoJDBCImpl implements UserDao {
             System.out.println("Успешно: удаление таблицы");
         } catch (SQLException e) {
             System.out.println("SQLEx " + e);
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 
@@ -47,6 +57,11 @@ public class UserDaoJDBCImpl implements UserDao {
             System.out.println("User с именем := " + name + " добавлен в базу данных");
         } catch (SQLException e) {
             System.out.println("SQLEx " + e);
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
     public void removeUserById(long id) {
@@ -56,6 +71,11 @@ public class UserDaoJDBCImpl implements UserDao {
             System.out.println("User удален");
         } catch (SQLException e) {
             System.out.println("SQLEx " + e);
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 
@@ -85,7 +105,12 @@ public class UserDaoJDBCImpl implements UserDao {
             System.out.println("Таблица очищена");
         } catch (SQLException e) {
             System.out.println("SQLEx " + e);
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 }
-// логика транзакций по типу возврашение к коммиту? я совсем не понимаю как это можно сделать
+
